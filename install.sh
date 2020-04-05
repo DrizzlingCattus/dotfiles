@@ -7,6 +7,11 @@ for rc in *rc *profile tmux.conf; do
   ln -sfv "$BASE/$rc" ~/."$rc"
 done
 
+if [ "$(uname -s)" = 'Darwin' ]
+then
+  brew install reattach-to-user-namespace git tmux
+fi
+
 git config --global user.email "hit0473@gmail.com"
 git config --global user.name "DrizzlingCattus"
 
