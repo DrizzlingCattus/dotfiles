@@ -15,6 +15,12 @@ fi
 git config --global user.email "hit0473@gmail.com"
 git config --global user.name "DrizzlingCattus"
 
+# install git completion
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
+
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 tmux source-file ~/.tmux.conf

@@ -7,20 +7,27 @@ alias vim=/usr/local/bin/nvim
 cd() { builtin cd "$@"; ll; }
 hcurl() { curl "cheat.sh/$1"; }
 
+export EDITOR=/usr/local/bin/nvim
+
 # go env
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
+export PATH=$GOBIN:$PATH
+export PATH=/usr/local/go/bin:$PATH
 
-export EDITOR=/usr/local/bin/nvim
 export PATH="/usr/local/sbin:$PATH"
 export PATH=$HOME/bin:$PATH
+export PATH=/usr/local/bin:$PATH
 # mysql-client binarys
 export PATH=/usr/local/Cellar/mysql-client/8.0.18/bin:$PATH
-# go downloaded bin
-export PATH=$GOBIN:$PATH
 
 source $HOME/.bashrc.d/ps1_test.sh
+if [ -f ~/.git-completion.bash ]; then
+  source ~/.git-completion.bash
+fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+complete -C /usr/local/bin/terraform terraform
