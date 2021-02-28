@@ -11,6 +11,7 @@ augroup END
 
 let s:darwin = has('mac')
 let s:windows = has('win32') || has('win64')
+let s:python3_support = has('python3')
 let mapleader = '\'
 let maplocalleader = '\'
 
@@ -198,13 +199,16 @@ Plug 'dense-analysis/ale'
 " plugin - workflow
 " ---------------------------------------------------------------------------
 " snippet management
-Plug 'SirVer/ultisnips'
-  " Trigger configuration. if you use <Tab>, then it can be occur error with conflicting exist plugin using <Tab>.
-  let g:UltiSnipsExpandTrigger="<Tab>"
-  let g:UltiSnipsJumpForwardTrigger="<Right>"
-  let g:UltiSnipsJumpBackwardTrigger="<Left>"
-  let g:UltiSnipsEditSplit="vertical"     " If you want :UltiSnipsEdit to split your window.
-  let g:UltiSnipsSnippetDirectories = ['~/.vim/snippet']
+" TODO: check python3 support
+if v:version >= 704 && s:python3_support
+  Plug 'SirVer/ultisnips'
+    " Trigger configuration. if you use <Tab>, then it can be occur error with conflicting exist plugin using <Tab>.
+    let g:UltiSnipsExpandTrigger="<Tab>"
+    let g:UltiSnipsJumpForwardTrigger="<Right>"
+    let g:UltiSnipsJumpBackwardTrigger="<Left>"
+    let g:UltiSnipsEditSplit="vertical"     " If you want :UltiSnipsEdit to split your window.
+    let g:UltiSnipsSnippetDirectories = ['~/.vim/snippet']
+endif
 
 " live markdown plugin
 Plug 'shime/vim-livedown'
@@ -520,8 +524,8 @@ nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 " Keybindings - my script
 " ---------------------------------------------------------------------------
 " Save to playground vim file
-nnoremap <leader>vim :call SaveToPlayground("~/.config/nvim/playground/")<cr>
+nnoremap <leader>vim :call SaveToPlayground("~/.vim/playground/")<cr>
 " wrapping vim comment title
 nnoremap <leader>wv :call WrapVimTitle("-", "-")<CR>
 " Open init.vim
-nnoremap <leader>init :sp ~/.config/nvim/init.vim<cr>
+nnoremap <leader>init :sp ~/.vimrc<cr>
