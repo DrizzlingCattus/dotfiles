@@ -7,7 +7,7 @@ alias mysqladmin=/usr/local/mysql/bin/mysqladmin
 cd() { builtin cd "$@"; ll; }
 hcurl() { curl "cheat.sh/$1"; }
 
-export EDITOR=/usr/local/bin/nvim
+export EDITOR=/usr/local/bin/vim
 export SHELL='/bin/bash'
 
 # go env
