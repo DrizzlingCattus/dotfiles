@@ -208,13 +208,13 @@ Plug 'christoomey/vim-tmux-navigator'
   let g:tmux_navigator_save_on_switch = 1
 
 " gdb integration
-Plug 'vim-scripts/Conque-GDB'
-  " 1: strip color after 200 line, 2: always with color
-  let g:ConqueTerm_Color=2            
-  " close conque when program ends running
-  let g:ConqueTerm_CloseOnEnd=1
-  " display warning message if conqueTerm is configed incorrect
-  let g:ConqueTerm_StartMessages=0
+"Plug 'vim-scripts/Conque-GDB'
+"  " 1: strip color after 200 line, 2: always with color
+"  let g:ConqueTerm_Color=2            
+"  " close conque when program ends running
+"  let g:ConqueTerm_CloseOnEnd=1
+"  " display warning message if conqueTerm is configed incorrect
+"  let g:ConqueTerm_StartMessages=0
 
 call plug#end()
 endif
@@ -232,10 +232,25 @@ set path+=.,/usr/include/*,/usr/include/**/*,**
 " do not act like vi
 set nocompatible
 
-set nu
+" Display number of line in side of editor (same with nu)
+set number
 
-" c-lang auto indent on
-" set cindent
+" show current cursor coordination(row, col)
+set ruler
+
+" highlight paren pair
+set showmatch
+
+" viminfo size
+set history=1000
+
+" highlighting search
+set hlsearch
+
+" incremental search when insert characters one by one
+set incsearch
+
+" set cindent " c-lang auto indent on
 
 " do auto indenting when starting a new line 
 set autoindent
@@ -250,9 +265,6 @@ set timeoutlen=500
 " Stop the search at the end or start of the file
 " that is, disabled search by rotating
 set nowrapscan
-
-" Display number of line in side of editor
-set number
 
 " Write the contents of the fileon :make like command
 " if it has been modified,
@@ -281,6 +293,7 @@ set updatetime=300
 
 " 'syntax on' allow you to change highlight color 
 syntax on
+" set global colorscheme
 colorscheme pulumi
 hi ColorColumn ctermbg=Red guibg=Red
 
