@@ -12,7 +12,7 @@ then
   [ -z "$(which brew)" ] && ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   
   echo "Install homebrew packages"
-  brew install --cask iterm2 karabiner-element
+  brew install --cask iterm2 karabiner-elements
 
   brew install vim wget git bash-completion cscope \ 
     jq ruby python go reattach-to-user-namespace git tmux
