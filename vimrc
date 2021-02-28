@@ -14,6 +14,7 @@ let s:windows = has('win32') || has('win64')
 let mapleader = '\'
 let maplocalleader = '\'
 
+
 " ---------------------------------------------------------------------------
 " plugin manager
 " ---------------------------------------------------------------------------
@@ -198,6 +199,13 @@ Plug 'dense-analysis/ale'
 " ---------------------------------------------------------------------------
 " snippet management
 Plug 'SirVer/ultisnips'
+  " Trigger configuration. if you use <Tab>, then it can be occur error with conflicting exist plugin using <Tab>.
+  let g:UltiSnipsExpandTrigger="<Tab>"
+  let g:UltiSnipsJumpForwardTrigger="<Right>"
+  let g:UltiSnipsJumpBackwardTrigger="<Left>"
+  let g:UltiSnipsEditSplit="vertical"     " If you want :UltiSnipsEdit to split your window.
+  let g:UltiSnipsSnippetDirectories = ['~/.vim/snippet']
+
 " live markdown plugin
 Plug 'shime/vim-livedown'
 
@@ -225,7 +233,11 @@ filetype plugin indent on
 " ---------------------------------------------------------------------------
 " built-in settings
 " ---------------------------------------------------------------------------
-set clipboard+=unnamedplus
+if s:darwin 
+  set clipboard=unnamed
+else
+  set clipboard=unnamedplus " linux
+endif
 " for include-search
 set path+=.,/usr/include/*,/usr/include/**/*,**
 
@@ -291,6 +303,8 @@ set cmdheight=2
 " delays and poor user experience.
 set updatetime=300
 
+" set nopaste
+
 " 'syntax on' allow you to change highlight color 
 syntax on
 " set global colorscheme
@@ -304,7 +318,8 @@ augroup customIndent
     autocmd! customIndent
     autocmd FileType c set tabstop=4|set shiftwidth=4|set expandtab
     autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab
-    autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 
+    autocmd FileType vim set tabstop=2|set shiftwidth=2|set expandtab
+    autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 augroup END
 
 
