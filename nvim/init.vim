@@ -11,7 +11,8 @@ if executable("python3")
   let s:python3_local = substitute(system("which python3"), '\n\+$', '', '')
 
   function! Python3_determine_pip_options()
-    let l:pip_options = '--user --upgrade '
+    " TODO: check to --user option is needed or not
+    let l:pip_options = '--upgrade'
     if empty(substitute(system("python3 -c 'import site; print(site.getusersitepackages())' 2>/dev/null"), '\n\+$', '', ''))
       " virtualenv pythons may not have site-packages, hence no 'pip -user'
       let l:pip_options = '--upgrade '
