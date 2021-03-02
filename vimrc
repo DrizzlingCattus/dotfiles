@@ -309,6 +309,9 @@ set hidden
 set nobackup
 set nowritebackup
 
+" not creating swap files
+set noswapfile
+
 " Give more space for displaying messages.
 set cmdheight=2
 
