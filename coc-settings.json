@@ -10,6 +10,17 @@
       "filetypes": ["go"]
     }
   },
-  "python.jediPath": "/usr/local/lib/python3.9/site-packages",
+  "python.pythonPath": "~/.pyenv/shims/python",
+  "python.venvPath": "~/.pyenv/",
+
+  "python.jediEnabled": true,
+  "python.jediPath": "~/.pyenv/versions/neovim3/lib/python3.8/site-packages/",
+
+  "python.formatting.provider": "yapf",
+  "python.formatting.yapfPath": "~/.pyenv/versions/neovim3/bin/yapf",
+  "python.linting.pylintEnabled": true,
+  "python.linting.flake8Enabled": false,
+  "python.linting.pylintPath": "~/.pyenv/versions/neovim3/bin/pylint",
+
   "java.errors.incompleteClasspath.severity": "ignore"
 }
