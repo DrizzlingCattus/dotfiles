@@ -26,7 +26,8 @@ silent! if plug#begin('~/.vim/plugged')
 " plugin - face
 " ---------------------------------------------------------------------------
 " colorscheme
-Plug 'pgavlin/pulumi.vim'
+Plug 'morhetz/gruvbox'
+"Plug 'pgavlin/pulumi.vim'
 
 " ---------------------------------------------------------------------------
 " plugin - vim magic
@@ -140,6 +141,15 @@ Plug 'gisphm/vim-gitignore'
 " ---------------------------------------------------------------------------
 " plugin - language
 " ---------------------------------------------------------------------------
+" python syntax highlighting
+Plug 'vim-python/python-syntax'
+  let g:python_highlight_func_calls = 1
+  let g:python_highlight_builtins = 1
+  let g:python_highlight_class_vars = 1
+  let g:python_highlight_doctests = 1
+  let g:python_highlight_indent_errors = 1
+  let g:python_highlight_space_errors = 1
+
 " provide improved javascript syntax highlight and indent
 " This comment is left for historic point with vim-jxs-improve
 Plug 'pangloss/vim-javascript'
@@ -199,7 +209,6 @@ Plug 'dense-analysis/ale'
 " plugin - workflow
 " ---------------------------------------------------------------------------
 " snippet management
-" TODO: check python3 support
 if v:version >= 704 && s:python3_support
   Plug 'SirVer/ultisnips'
     " Trigger configuration. if you use <Tab>, then it can be occur error with conflicting exist plugin using <Tab>.
@@ -312,7 +321,8 @@ set updatetime=300
 " 'syntax on' allow you to change highlight color 
 syntax on
 " set global colorscheme
-colorscheme pulumi
+autocmd vimenter * ++nested colorscheme gruvbox
+"colorscheme pulumi
 hi ColorColumn ctermbg=Red guibg=Red
 
 " indent binding according to file type
