@@ -13,8 +13,7 @@
   "python.pythonPath": "~/.pyenv/shims/python",
   "python.venvPath": "~/.pyenv/",
 
-  "python.jediEnabled": true,
-  "python.jediPath": "~/.pyenv/versions/neovim3/lib/python3.8/site-packages/",
+  "python.jediEnabled": false,
 
   "python.formatting.provider": "yapf",
   "python.formatting.yapfPath": "~/.pyenv/versions/neovim3/bin/yapf",
