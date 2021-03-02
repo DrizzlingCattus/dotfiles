@@ -17,10 +17,8 @@ ln -sf $BASE/vimrc ~/.vimrc
 
 # nvim
 mkdir -p ~/.config/nvim/autoload
-ln -sf $BASE/vimrc ~/.config/nvim/init.vim
+ln -sf $BASE/nvim/init.vim ~/.config/nvim/init.vim
 ln -sf ~/.vim/autoload/plug.vim ~/.config/nvim/autoload/
-
-mkdir -p ~/.config/nvim
 ln -sf $BASE/coc-settings.json ~/.config/nvim/coc-settings.json
 
 vim +PlugInstall +qall
