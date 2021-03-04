@@ -328,6 +328,13 @@ autocmd vimenter * ++nested colorscheme gruvbox
 "colorscheme pulumi
 hi ColorColumn ctermbg=Red guibg=Red
 
+" add filetypes
+autocmd BufRead,BufNewFile *.yaml setfiletype general
+autocmd BufRead,BufNewFile *.yml setfiletype general
+autocmd BufRead,BufNewFile *.json setfiletype general
+autocmd BufRead,BufNewFile *.cu setfiletype cuda
+autocmd BufRead,BufNewFile *.kt setfiletype kotlin
+
 " indent binding according to file type
 " Note that vim augroup need, cuz it duplicate when sourcing init.vim file
 " and duplicating make vim slow
@@ -338,6 +345,7 @@ augroup customIndent
     autocmd FileType vim set tabstop=2|set shiftwidth=2|set expandtab
     autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 augroup END
+
 
 
 " ---------------------------------------------------------------------------
