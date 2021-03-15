@@ -25,3 +25,15 @@ logger = get_logger(logging.INFO)
 if __name__ == '__main__':
     logger.info('hello python')
 endsnippet
+
+snippet iterator "python iterator" b
+class ${1:name}Iterator:
+    def __iter__(self):
+	self.counter = 0
+	return self
+
+    def __next__(self):
+	x = self.counter
+	self.counter += 1
+	return x
+endsnippet
