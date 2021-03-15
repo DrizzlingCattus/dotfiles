@@ -1,0 +1,15 @@
+snippet fb_class "factory boy Factory class" b
+class ${1:model_name}Factory(factory.Factory):
+  class Meta:
+    model = ${1:model_name}
+endsnippet
+
+snippet fb_django_class "factory boy Django Factory class" b
+class ${1:model_name}Factory(factory.django.DjangoModelFactory):
+    class Meta:
+      model = ${1:model_name}
+endsnippet
+
+snippet fb_field_seq "factory body field sequence" b
+factory.Sequence(lambda n: '${1:sequence_template}' % n)
+endsnippet

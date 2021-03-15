@@ -1,0 +1,16 @@
+snippet click-basic-example "click basic example" b
+
+endsnippet
+
+snippet click-group "click group function" b
+@click.group()
+def ${1:NAME}():
+	click.echo(f'group is calling')
+endsnippet
+
+snippet click-command "click command function" b
+@click.command()
+def ${1:NAME}():
+	click.echo(f'command')
+endsnippet
+
