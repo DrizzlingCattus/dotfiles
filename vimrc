@@ -89,6 +89,8 @@ Plug 'vim-scripts/grep.vim'
 Plug 'vim-airline/vim-airline'
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+  let g:airline#extensions#ale#enabled = 1
   " setup powerline font
   " 1. install powerline font package
   " 2. apt-get install fonts-powerline
@@ -187,14 +189,16 @@ endif
 " LSP Client + Linter & Fixer
 Plug 'dense-analysis/ale'
   let g:ale_fixers = {
-	\'javascript': ['prettier', 'eslint'],
-	\'typescript': ['prettier', 'eslint']
-	\}
+        \'*': ['remove_trailing_lines', 'trim_whitespace'],
+        \'javascript': ['prettier', 'eslint'],
+        \'typescript': ['prettier', 'eslint'],
+        \'python': ['black', 'yapf']
+        \}
   let g:ale_linters = {
-	\'javascript': ['eslint'], 
-	\'typescript': ['eslint'],
-	\'python': ['flake', 'pylint']
-	\}
+        \'javascript': ['eslint'],
+        \'typescript': ['eslint'],
+        \'python': ['flake', 'pylint']
+        \}
   " use quickfix, not loclist
   let g:ale_set_loclist = 0
   let g:ale_set_quickfix = 1
@@ -202,6 +206,10 @@ Plug 'dense-analysis/ale'
   " set this variable to 1 to fix files when you save them.
   let g:ale_fix_on_save = 1
   let g:ale_lint_delay = 1000
+  " set linter error, warning message format
+  let g:ale_echo_msg_error_str = 'E'
+  let g:ale_echo_msg_warning_str = 'W'
+  let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
   nmap ]a <Plug>(ale_next_wrap)
   nmap [a <Plug>(ale_previous_wrap)
 
@@ -231,7 +239,7 @@ Plug 'christoomey/vim-tmux-navigator'
 " gdb integration
 "Plug 'vim-scripts/Conque-GDB'
 "  " 1: strip color after 200 line, 2: always with color
-"  let g:ConqueTerm_Color=2            
+"  let g:ConqueTerm_Color=2
 "  " close conque when program ends running
 "  let g:ConqueTerm_CloseOnEnd=1
 "  " display warning message if conqueTerm is configed incorrect
@@ -246,7 +254,7 @@ filetype plugin indent on
 " ---------------------------------------------------------------------------
 " built-in settings
 " ---------------------------------------------------------------------------
-if s:darwin 
+if s:darwin
   set clipboard=unnamed
 else
   set clipboard=unnamedplus " linux
@@ -277,7 +285,7 @@ set incsearch
 
 " set cindent " c-lang auto indent on
 
-" do auto indenting when starting a new line 
+" do auto indenting when starting a new line
 set autoindent
 set smartindent
 
@@ -321,7 +329,7 @@ set updatetime=300
 
 " set nopaste
 
-" 'syntax on' allow you to change highlight color 
+" 'syntax on' allow you to change highlight color
 syntax on
 " set global colorscheme
 autocmd vimenter * ++nested colorscheme gruvbox
@@ -437,12 +445,12 @@ function! WrapVimTitle(start, end)
   let start_comment = "\" "
   let l:str_wrapper = start_comment . repeat(a:start, length)
   let l:end_wrapper = start_comment . repeat(a:end, length)
-  
+
   " 기존에 mapping되어있는 keybinding을 무시하고 normal모드 진입
   " 타이틀 위쪽에 {str_wrapper}를 삽입
   normal! O
   call setline(".", l:str_wrapper)
-  
+
   " 타이틀 아래쪽에 {end_wrapper}를 삽입
   normal! jo
   call setline(".", l:end_wrapper)
