@@ -49,3 +49,5 @@ export PATH=$HELM_PATH:$PATH
 export DOCKER_PATH=/Users/user/bin
 export PATH=$DOCKER_PATH:$PATH
 [ -s "/Users/user/.jabba/jabba.sh" ] && source "/Users/user/.jabba/jabba.sh"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
