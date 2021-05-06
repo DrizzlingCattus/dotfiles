@@ -1,0 +1,18 @@
+snippet fun "kotlin function definition" b
+fun ${1:name}(${2:params}: ${3:type}): String = "Hello"
+endsnippet
+
+snippet lambda "kotlin lambda" b
+collection.any { i: Int -> i % 2 == 0 }
+endsnippet
+
+snippet collection "kotlin collection examples" b
+collection: Collection<Int>
+val iterator = hcollection.iterator()
+while(iterator.hasNext()) {
+	val element = iterator.next()
+	if (iterator.hasNext()) {
+		// something
+	}
+}
+endsnippet

@@ -19,8 +19,19 @@ from unittest.mock import patch
 def test_mock_example(self, mock_os, mock_path):
   mock_os.change.return_value = True
   mock_path.isdir.return_value = False
-  
+
   <package>.<module>.run()
 
   mock_os.chdir.assert_called_with('/a/b')
+endsnippet
+
+snippet unittest-mock-func-example "python unittest mock function example" b
+@patch('<package>.<module>.<function>')
+def test_mock_examole(self, mock_func):
+    mock_func.return_value = 'hello world'
+
+    def side_effect(*args, **kwargs):
+        return args
+
+    mock_func.side_effect = side_effect
 endsnippet
