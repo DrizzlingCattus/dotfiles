@@ -1,20 +1,21 @@
 #!/bin/bash
 
 BASE=$(pwd)
-for rc in *rc *profile tmux.conf; do
+for rc in *rc *profile tmux.conf Xmodmap; do
   mkdir -pv bak
   [ -e ~/."$rc" ] && mv -v ~/."$rc" bak/."$rc"
   ln -sfv "$BASE/$rc" ~/."$rc"
 done
 
-if [ "$(uname -s)" = 'Darwin' ]
+OS_NAME=$(uname -s)
+if [ "$OS_NAME" = 'Darwin' ]
 then
   [ -z "$(which brew)" ] && ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  
+
   echo "Install homebrew packages"
   brew install --cask iterm2 karabiner-elements
 
-  brew install vim wget git bash-completion cscope \ 
+  brew install vim wget git bash-completion cscope \
     jq ruby python go reattach-to-user-namespace git tmux
 
   brew tap universal-ctags/universal-ctags
@@ -23,6 +24,12 @@ then
   gem install gem-ctags
   gem ctags
 else
+  echo "keyboard mapping for Linux"
+  xmodmap -pke > ~/Xmodmap_origin_backup
+  xmodmap ~/.Xmodmap
+
+  # make tmux without reattach-to-user-namespace related things
+  echo "Make tmux settings for Linux"
   rm -f ~/.tmux.conf
   grep -v reattach-to-user-namespace tmux.conf > ~/.tmux.conf
 fi
