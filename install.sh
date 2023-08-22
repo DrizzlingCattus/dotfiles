@@ -1,22 +1,76 @@
 #!/bin/bash
 
-BASE=$(pwd)
-for rc in *rc *profile tmux.conf Xmodmap; do
-  mkdir -pv bak
-  [ -e ~/."$rc" ] && mv -v ~/."$rc" bak/."$rc"
-  ln -sfv "$BASE/$rc" ~/."$rc"
-done
-
 OS_NAME=$(uname -s)
 if [ "$OS_NAME" = 'Darwin' ]
 then
-  [ -z "$(which brew)" ] && ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  BASE="$(pwd)/mac"
+else
+  BASE="$(pwd)/linux"
+fi
 
+mkdir -pv bak
+for rc_common in tmux.conf; do
+  [ -e ~/."$rc" ] && mv -v ~/."$rc" bak/."$rc"
+  ln -sfv "$(pwd)/$rc" ~/."$rc"
+done
+
+for rc in $BASE/*; do
+  RC_FILENAME=`basename $rc`
+  [ -e ~/."$RC_FILENAME" ] && mv -v ~/."$RC_FILENAME" bak/."$RC_FILENAME"
+  ln -sfv "$rc" ~/."$RC_FILENAME"
+done
+
+if [ "$OS_NAME" = 'Darwin' ]
+then
+  if [ -z "$(which brew)" ]
+  then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "$BASE/bashrc"
+  fi
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+
+  # install basic homebrew packages
   echo "Install homebrew packages"
-  brew install --cask iterm2 karabiner-elements
+  brew install --cask iterm2 karabiner-elements google-chrome rectangle
 
-  brew install vim wget git bash-completion cscope \
-    jq ruby python go reattach-to-user-namespace git tmux
+  brew install vim wget curl coreutils git bash-completion \
+    jq \
+    cscope reattach-to-user-namespace tmux \
+    docker docker-compose
+
+  # install asdf
+  echo "Install asdf and asdf related packages"
+  if [ -z "$(which asdf)" ]
+  then
+    brew install asdf
+    # echo -e "\n. \"$(brew --prefix asdf)/libexec/asdf.sh\"" >> "$BASE/bashrc"
+    # echo -e "\n. \"$(brew --prefix asdf)/etc/bash_completion.d/asdf.bash\"" >> "$BASE/bashrc"
+  fi
+
+  ## asdf nodejs
+  asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+  asdf install nodejs latest
+  asdf global nodejs latest
+
+  ## asdf python
+  asdf plugin add python
+  asdf install python latest
+  asdf global python latest
+
+  ## asdf go
+  asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
+  asdf install golang 1.21.0
+  asdf global golang 1.21.0
+
+  ## asdf ruby
+  asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
+  asdf install ruby latest
+  asdf global ruby latest
+
+  ## asdf kubectl
+  asdf plugin add kubectl https://github.com/asdf-community/asdf-kubectl.git
+  asdf install kubectl latest
+  asdf global kubectl latest
 
   brew tap universal-ctags/universal-ctags
   brew install --HEAD universal-ctags

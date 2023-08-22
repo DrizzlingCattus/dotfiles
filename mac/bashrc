@@ -1,0 +1,57 @@
+alias ll='ls -FGlAhp --color=auto'
+alias ls="ls -G --color=auto"
+
+cd() { builtin cd "$@"; ll; }
+hcurl() { curl "cheat.sh/$1"; }
+
+parse_git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+setup_prompt() {
+  if [ "`id -u`" -eq 0 ]; then
+    # must git version > 1.9.3
+    PS1="\[\033[m\]|\[\033[1;35m\]\t\[\033[m\]|\[\e[0m\]\[\e[1;32m\][\W]:\$(parse_git_branch)\[\033[00m\]> \[\e[0m\]"
+  else
+    # must git version > 1.9.3
+    PS1="\[\033[m\]|\[\033[1;35m\]\t\[\033[m\]|\[\e[0m\]\[\e[1;32m\][\W]:\$(parse_git_branch)\[\033[00m\]> \[\e[0m\]"
+  fi
+}
+setup_prompt
+export LS_COLORS="ow=1;105;30:di=1;34"
+
+export EDITOR="$(which vim)"
+export SHELL='/bin/bash'
+
+# setup path env
+export PATH=/user/local/bin:$PATH
+export PATH=$HOME/bin:$PATH
+export PATH=$HOME/scripts:$PATH
+## Commands also provided by macOS and the commands dir, dircolors, vdir have been installed with the prefix "g".
+## If you need to use these commands with their normal names, you can add a "gnubin" directory to your PATH with:
+export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+## curl is keg-only, which means it was not symlinked into /opt/homebrew,
+## because macOS already provides this software and installing another version in parallel can cause all kinds of trouble.
+## If you need to have curl first in your PATH, run:
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+
+# setup extra env
+## For compilers to find curl you may need to set:
+export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
+## For pkg-config to find curl you may need to set:
+export PKG_CONFIG_PATH="/opt/homebrew/opt/curl/lib/pkgconfig"
+
+
+# Load script or bin
+if [ -f ~/.git-completion.bash ]; then
+  source ~/.git-completion.bash
+fi
+
+complete -C /usr/local/bin/terraform terraform
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+. "/opt/homebrew/opt/asdf/libexec/asdf.sh"
+. "/opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash"
