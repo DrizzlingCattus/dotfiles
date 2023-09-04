@@ -1,8 +1,7 @@
 #!/bin/bash
 
 ## TODO: sudoer 권한 요구하는 방법
-## TODO: mac /bin/bash를 최신버전 binary로 교체하는 좋은 방법 하드링킹?
-## TODO: emojis 관리를 위한 bash command
+## TODO: mac /bin/bash를 최신버전 binary로 교체하는 좋은 방법 하드링킹이면 충분?
 
 function echo_pretty() {
   input_str=$1
@@ -56,7 +55,7 @@ then
 
   # install basic homebrew packages
   echo_pretty "Install homebrew packages"
-  brew install --cask iterm2 karabiner-elements google-chrome rectangle
+  brew install --cask iterm2 karabiner-elements google-chrome rectangle eul
 
   brew install vim wget curl coreutils git bash-completion \
     jq \
@@ -122,6 +121,12 @@ else
   rm -f ~/.tmux.conf
   grep -v reattach-to-user-namespace tmux.conf > ~/.tmux.conf
 fi
+
+# theme
+git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git color-schemes
+cd color-schemes
+tools/import-scheme.sh "Solarized Dark Higher Contrast"
+cd ..
 
 git config --global user.email "hit0473@gmail.com"
 git config --global user.name "DrizzlingCattus"
