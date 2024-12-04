@@ -55,7 +55,9 @@ then
 
   # install basic homebrew packages
   echo_pretty "Install homebrew packages"
-  brew install --cask iterm2 karabiner-elements google-chrome rectangle eul
+  brew install --cask iterm2 karabiner-elements google-chrome rectangle  # for utility
+  brew install --cask insomnia # for dev
+  brew install --cask eul # for information
 
   brew install vim wget curl coreutils git bash-completion \
     jq \
