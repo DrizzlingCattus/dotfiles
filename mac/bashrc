@@ -30,6 +30,9 @@ export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 ## If you need to have curl first in your PATH, run:
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 
+export ASDF_DATA_DIR="$HOME/.asdf"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
 # setup extra env
 ## For compilers to find curl you may need to set:
 export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
@@ -50,11 +53,14 @@ complete -C /usr/local/bin/terraform terraform
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 . "/opt/homebrew/opt/asdf/libexec/asdf.sh"
-. "/opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash"
+. <(asdf completion bash)
+
+# For JAVA_HOME configuration (https://github.com/halcyon/asdf-java?tab=readme-ov-file#java_home)
+. ~/.asdf/plugins/java/set-java-home.bash
 
 #
 alias ll='ls -FGlAhp --color=auto'
 alias ls="ls -G --color=auto"
 
-cd() { builtin cd "$@"; ll; }
+cdl() { builtin cd "$@"; ll; }
 hcurl() { curl "cheat.sh/$1"; }
