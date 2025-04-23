@@ -13,15 +13,17 @@
 
   "pyright.enable": true,
 
-  "python.pythonPath": "~/.pyenv/shims/python3",
-  "python.venvPath": "~/.pyenv/",
+  "python.pythonPath": "~/.asdf/shims/python",
+  "python.venvPath": "~/.asdf/",
 
   "python.formatting.provider": "yapf",
-  "python.formatting.yapfPath": "~/.pyenv/versions/neovim3/bin/yapf",
+  "python.formatting.yapfPath": "~/.asdf/shims/yapf",
   "python.linting.pylintEnabled": true,
   "python.linting.flake8Enabled": false,
   "python.linting.mypyEnabled": true,
-  "python.linting.pylintPath": "~/.pyenv/versions/neovim3/bin/pylint",
+  "python.linting.pylintPath": "~/.asdf/shims/pylint",
 
-  "java.errors.incompleteClasspath.severity": "ignore"
+  "java.errors.incompleteClasspath.severity": "ignore",
+
+  "coc.preferences.formatOnSaveFiletypes": ["python"]
 }

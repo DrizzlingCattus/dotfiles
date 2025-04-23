@@ -8,4 +8,10 @@ fi
 
 . ~/.bashrc
 
+
+export ENABLE_MAVEN_LOCAL=true
+
+# https://apple.stackexchange.com/questions/371997/suppressing-the-default-interactive-shell-is-now-zsh-message-in-macos-catalina
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 export GPG_TTY=$(tty)
