@@ -9,7 +9,6 @@ function echo_pretty() {
   case "$level" in
     "1")
       echo -e "🚜\e[34m [[[[[[[[[[ $input_str ]]]]]]]]]] \e[0m"
-
       ;;
     "2")
       echo -e "🛺\e[32m {{{{{{{{{{ $input_str }}}}}}}}}} \e[0m"
@@ -57,9 +56,7 @@ then
 
   # install basic homebrew packages
   echo_pretty "Install homebrew packages"
-  brew install --cask iterm2 karabiner-elements google-chrome rectangle  # for utility
-  brew install --cask insomnia # for dev
-  brew install --cask eul # for information
+  brew install --cask ghostty karabiner-elements google-chrome rectangle eul
 
   brew install vim wget curl coreutils git bash-completion \
     jq \
@@ -78,27 +75,37 @@ then
   echo_pretty "Install asdf node" 2
   asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
   asdf install nodejs latest
-  asdf global nodejs latest
+  asdf set --home nodejs latest
 
   echo_pretty "Install asdf python" 2
   asdf plugin add python
   asdf install python latest
-  asdf global python latest
+  asdf set --home python latest
 
   echo_pretty "Install asdf golang" 2
   asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
   asdf install golang 1.21.0
-  asdf global golang 1.21.0
+  asdf set --home golang 1.21.0
 
   echo_pretty "Install asdf ruby" 2
   asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
   asdf install ruby latest
-  asdf global ruby latest
+  asdf set --home ruby latest
 
   echo_pretty "Install asdf kubectl" 2
   asdf plugin add kubectl https://github.com/asdf-community/asdf-kubectl.git
   asdf install kubectl latest
-  asdf global kubectl latest
+  asdf set --home kubectl latest
+
+  echo_pretty "Install asdf deno" 2
+  asdf plugin add deno https://github.com/asdf-community/asdf-deno.git
+  asdf install deno latest
+  asdf set --home deno latest
+
+  echo_pretty "Install asdf java" 2
+  asdf plugin add java
+  asdf install java corretto-22.0.2.9.1
+  asdf set --home java corretto-22.0.2.9.1
 
   brew tap universal-ctags/universal-ctags
   brew install --HEAD universal-ctags
