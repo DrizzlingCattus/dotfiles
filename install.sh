@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ## TODO: sudoer 권한 요구하는 방법
 ## TODO: mac /bin/bash를 최신버전 binary로 교체하는 좋은 방법 하드링킹이면 충분?
@@ -31,12 +31,14 @@ else
   BASE="$(pwd)/linux"
 fi
 
+# backup current conf files and replace predefined conf-linked files
 mkdir -pv bak
-for rc in tmux.conf; do
-  [ -e ~/."$rc" ] && mv -v ~/."$rc" bak/."$rc"
-  ln -sfv "$(pwd)/$rc" ~/."$rc"
+for conf in tmux.conf; do
+  [ -e ~/."$conf" ] && mv -v ~/."$conf" bak/."$conf"
+  ln -sfv "$(pwd)/$conf" ~/."$conf"
 done
 
+# backup current system rc files and replace predefined rc-linked files
 for rc in $BASE/*; do
   RC_FILENAME=`basename $rc`
   [ -e ~/."$RC_FILENAME" ] && mv -v ~/."$RC_FILENAME" bak/."$RC_FILENAME"

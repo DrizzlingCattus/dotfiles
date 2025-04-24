@@ -16,8 +16,9 @@
   "python.pythonPath": "~/.asdf/shims/python",
   "python.venvPath": "~/.asdf/",
 
-  "python.formatting.provider": "yapf",
+  "python.formatting.provider": "black",
   "python.formatting.yapfPath": "~/.asdf/shims/yapf",
+  "python.formatting.blackPath": "~/.asdf/shims/black",
   "python.linting.pylintEnabled": true,
   "python.linting.flake8Enabled": false,
   "python.linting.mypyEnabled": true,

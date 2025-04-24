@@ -11,10 +11,10 @@ parse_git_branch() {
 }
 if [ "`id -u`" -eq 0 ]; then
   # must git version > 1.9.3
-  PS1="\[\033[m\]|\[\033[1;35m\]\t\[\033[m\]|\[\e[0m\]\[\e[1;32m\][\W]:\$(parse_git_branch)\[\033[00m\]> \[\e[0m\]"
+  PS1="\[\033[m\]|\[\033[1;35m\]\t\[\033[m\]|\[\e[0m\]\[\e[1;32m\][\w]\[\033[m\]|\[\e[0m\]\$(parse_git_branch)\n\[\033[00m\]\$ \[\e[0m\]"
 else
   # must git version > 1.9.3
-  PS1="\[\033[m\]|\[\033[1;35m\]\t\[\033[m\]|\[\e[0m\]\[\e[1;32m\][\W]:\$(parse_git_branch)\[\033[00m\]> \[\e[0m\]"
+  PS1="\[\033[m\]|\[\033[1;35m\]\t\[\033[m\]|\[\e[0m\]\[\e[1;32m\][\w]\[\033[m\]|\[\e[0m\]\$(parse_git_branch)\n\[\033[00m\]\$ \[\e[0m\]"
 fi
 export LS_COLORS="ow=1;105;30:di=1;34"
 
