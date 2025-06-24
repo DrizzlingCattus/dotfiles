@@ -56,7 +56,8 @@ then
   echo_pretty "Install homebrew packages"
   brew install --cask ghostty karabiner-elements google-chrome rectangle eul
 
-  brew install vim wget curl coreutils git bash-completion \
+  brew install wget curl coreutils git bash-completion \
+    vim neovim \
     jq \
     cscope reattach-to-user-namespace tmux \
     docker docker-compose
@@ -104,6 +105,11 @@ then
   asdf plugin add java
   asdf install java corretto-22.0.2.9.1
   asdf set --home java corretto-22.0.2.9.1
+
+  echo_pretty "Install asdf clojure" 2
+  asdf plugin add clojure https://github.com/asdf-community/asdf-clojure.git
+  asdf install clojure 1.12.0.1530
+  asdf set --home clojure 1.12.0.1530
 
   brew tap universal-ctags/universal-ctags
   brew install --HEAD universal-ctags
