@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ## TODO: sudoer 권한 요구하는 방법
 ## TODO: mac /bin/bash를 최신버전 binary로 교체하는 좋은 방법 하드링킹이면 충분?
@@ -30,12 +30,14 @@ else
   BASE="$(pwd)/linux"
 fi
 
+# backup current conf files and replace predefined conf-linked files
 mkdir -pv bak
-for rc in tmux.conf; do
-  [ -e ~/."$rc" ] && mv -v ~/."$rc" bak/."$rc"
-  ln -sfv "$(pwd)/$rc" ~/."$rc"
+for conf in tmux.conf; do
+  [ -e ~/."$conf" ] && mv -v ~/."$conf" bak/."$conf"
+  ln -sfv "$(pwd)/$conf" ~/."$conf"
 done
 
+# backup current system rc files and replace predefined rc-linked files
 for rc in $BASE/*; do
   RC_FILENAME=`basename $rc`
   [ -e ~/."$RC_FILENAME" ] && mv -v ~/."$RC_FILENAME" bak/."$RC_FILENAME"
@@ -54,7 +56,8 @@ then
 
   # install basic homebrew packages
   echo_pretty "Install homebrew packages"
-  brew install --cask ghostty karabiner-elements google-chrome rectangle eul
+  brew install --cask ghostty karabiner-elements google-chrome rectangle eul \
+    font-jetbrains-mono
 
   brew install wget curl coreutils git bash-completion \
     vim neovim \
@@ -131,17 +134,13 @@ else
   xmodmap -pke > ~/Xmodmap_origin_backup
   xmodmap ~/.Xmodmap
 
+  # TODO: install ghostty, chrome, development tools, vscode, intellij ...
+
   # make tmux without reattach-to-user-namespace related things
   echo_pretty "Make tmux settings for Linux"
   rm -f ~/.tmux.conf
   grep -v reattach-to-user-namespace tmux.conf > ~/.tmux.conf
 fi
-
-# theme
-git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git color-schemes
-cd color-schemes
-tools/import-scheme.sh "Solarized Dark Higher Contrast"
-cd ..
 
 git config --global user.email "hit0473@gmail.com"
 git config --global user.name "DrizzlingCattus"
