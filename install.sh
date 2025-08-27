@@ -108,6 +108,11 @@ then
   asdf install java corretto-22.0.2.9.1
   asdf set --home java corretto-22.0.2.9.1
 
+  echo_pretty "Install asdf kotlin" 2
+  asdf plugin add kotlin
+  asdf install kotlin 1.8.22
+  asdf set --home kotlin 1.8.22
+
   brew tap universal-ctags/universal-ctags
   brew install --HEAD universal-ctags
 
