@@ -62,7 +62,7 @@ then
   brew install vim wget curl coreutils git bash-completion \
     jq \
     cscope reattach-to-user-namespace tmux \
-    docker docker-compose
+    docker docker-compose podman
 
   # install asdf
   echo_pretty "Install asdf"
