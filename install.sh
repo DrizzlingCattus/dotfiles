@@ -56,13 +56,14 @@ then
 
   # install basic homebrew packages
   echo_pretty "Install homebrew packages"
-  brew install --cask ghostty karabiner-elements google-chrome rectangle eul \
+  brew install --cask ghostty karabiner-elements google-chrome rectangle \
     font-jetbrains-mono
 
   brew install vim wget curl coreutils git bash-completion \
     jq \
     cscope reattach-to-user-namespace tmux \
-    docker docker-compose
+    docker docker-compose \
+    stats
 
   # install asdf
   echo_pretty "Install asdf"
@@ -118,7 +119,7 @@ then
 
   echo_pretty "Install latest bash"
   brew install bash
-  if [-z $(echo $(which bash) | grep $(which bash))]
+  if [ -z $(echo $(which bash) | grep $(which bash))]
   then
     echo_pretty "Enroll default shell path into /etc/shells" 2
     sudo bash -c 'echo $(which bash) >> /etc/shells'
