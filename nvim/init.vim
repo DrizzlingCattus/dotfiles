@@ -30,7 +30,7 @@ if executable("python3")
       let s:pip_options = Python3_determine_pip_options()
       execute ("!" . s:python3_local . " -m pip install " . s:pip_options . " pynvim")
       if v:shell_error != 0
-        call s:show_warning_message('ErrorMsg', "Installation of pynvim failed. Python-based features may not work.")
+        echoerr "Installation of pynvim failed. Python-based features may not work."
       endif
     endif
   endfunction
@@ -60,13 +60,9 @@ endtry
 " Warn users if modern python3 is not found.
 " (with timer, make it shown frontmost over other warning messages)
 if empty(g:python3_host_version)
-  call timer_start(0, { -> s:show_warning_message('ErrorMsg',
-        \ "ERROR: You don't have python3 on your $PATH. Most features are disabled.")
-        \ })
+  call timer_start(0, { -> execute('echohl ErrorMsg | echomsg "ERROR: You donot have python3 on your $PATH. MOST features are disabled." | echohl None') })
 elseif g:python3_host_version < '3.6.1'
-  call timer_start(0, { -> s:show_warning_message('WarningMsg',
-        \ printf("Warning: Please use python 3.6.1+ to enable intellisense features. (Current: %s)", g:python3_host_version))
-        \ })
+  call timer_start(0, { -> execute('echohl WarningMsg | echomsg "Warning: Please use python 3.6.1+ to enable intellisense features. (Current: ' . g:python3_host_version . ')" | echohl None') })
 endif
 
 " delegate to the plain vimrc.
