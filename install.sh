@@ -59,6 +59,7 @@ then
   brew install --cask ghostty karabiner-elements google-chrome rectangle \
     font-jetbrains-mono
 
+  # coreutils for GNU utility
   brew install vim wget curl coreutils git bash-completion \
     jq \
     cscope reattach-to-user-namespace tmux \
@@ -142,6 +143,11 @@ then
   echo_pretty "✅ Default shell changed to $BREW_BASH_PATH" 2
   echo_pretty "   Version: $NEW_BASH_VERSION" 2
   echo_pretty "   (Changes will apply after your next login)" 2
+
+  # for isolated python app space
+  brew install pipx
+  pipx ensurepath
+  sudo pipx ensurepath --global
 
   gem install gem-ctags
   gem ctags
