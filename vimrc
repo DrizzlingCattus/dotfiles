@@ -219,8 +219,10 @@ Plug 'dense-analysis/ale'
 " plugin - AI
 " ---------------------------------------------------------------------------
 " claude code
-Plug 'nvim-lua/plenary.nvim'
-Plug 'greggh/claude-code.nvim'
+if has("nvim")
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'greggh/claude-code.nvim'
+endif
 
 " ---------------------------------------------------------------------------
 " plugin - workflow
@@ -410,6 +412,7 @@ endif
 " claude code
 " ---------------------------------------------------------------------------
 " config ref: https://github.com/greggh/claude-code.nvim?tab=readme-ov-file#configuration
+if has("nvim")
 lua << EOF
 require('claude-code').setup({
   refresh={
@@ -420,6 +423,7 @@ require('claude-code').setup({
   }
 })
 EOF
+endif
 
 
 " ---------------------------------------------------------------------------

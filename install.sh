@@ -144,6 +144,7 @@ fi
 
 git config --global user.email "hit0473@gmail.com"
 git config --global user.name "DrizzlingCattus"
+git config --global core.editor "nvim"
 
 # install git completion
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
