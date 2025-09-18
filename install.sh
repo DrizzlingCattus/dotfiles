@@ -111,17 +111,15 @@ then
   asdf install java corretto-22.0.2.9.1
   asdf set --home java corretto-22.0.2.9.1
 
-<<<<<<< HEAD
   echo_pretty "Install asdf clojure" 2
   asdf plugin add clojure https://github.com/asdf-community/asdf-clojure.git
   asdf install clojure 1.12.0.1530
   asdf set --home clojure 1.12.0.1530
-=======
+
   echo_pretty "Install asdf kotlin" 2
   asdf plugin add kotlin
   asdf install kotlin 1.8.22
   asdf set --home kotlin 1.8.22
->>>>>>> 80e6c43f43f6af63b4b0d60745aa23fed49c9bff
 
   brew tap universal-ctags/universal-ctags
   brew install --HEAD universal-ctags
