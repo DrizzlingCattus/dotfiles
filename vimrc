@@ -156,6 +156,7 @@ Plug 'vim-python/python-syntax'
 " This comment is left for historic point with vim-jxs-improve
 Plug 'pangloss/vim-javascript'
 Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'othree/html5.vim'
 " Jenkinsfile groovy syntax
 Plug 'martinda/Jenkinsfile-vim-syntax'
 if v:version >= 800
@@ -180,6 +181,7 @@ endif
 Plug 'honza/dockerfile.vim'
 " kotlin - syntax highlight, indent, syntastic support
 Plug 'udalov/kotlin-vim'
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
 
 if v:version >= 800 && !s:windows
   " complete engine & lsp server management
@@ -212,6 +214,13 @@ Plug 'dense-analysis/ale'
   let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
   nmap ]a <Plug>(ale_next_wrap)
   nmap [a <Plug>(ale_previous_wrap)
+
+" ---------------------------------------------------------------------------
+" plugin - AI
+" ---------------------------------------------------------------------------
+" claude code
+Plug 'nvim-lua/plenary.nvim'
+Plug 'greggh/claude-code.nvim'
 
 " ---------------------------------------------------------------------------
 " plugin - workflow
@@ -395,6 +404,22 @@ if has_key(g:plugs, 'coc.nvim')
     autocmd VimEnter * nmap <silent> <leader>su <Plug>(coc-references)
   augroup END
 endif
+
+
+" ---------------------------------------------------------------------------
+" claude code
+" ---------------------------------------------------------------------------
+" config ref: https://github.com/greggh/claude-code.nvim?tab=readme-ov-file#configuration
+lua << EOF
+require('claude-code').setup({
+  refresh={
+    enable = true,
+    updatetime = 100,
+    timer_interval = 1000,
+    show_notifications = true,
+  }
+})
+EOF
 
 
 " ---------------------------------------------------------------------------

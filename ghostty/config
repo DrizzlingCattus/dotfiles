@@ -71,3 +71,6 @@ palette = 12=#fc9867
 palette = 13=#ab9df2
 palette = 14=#78dce8
 palette = 15=#fcfcfa
+
+# font
+font-family = font-jetbrains-mono
