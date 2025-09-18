@@ -15,3 +15,6 @@ export ENABLE_MAVEN_LOCAL=true
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 export GPG_TTY=$(tty)
+
+# Created by `pipx` on 2025-07-03 04:55:16
+export PATH="$PATH:/Users/user/.local/bin"

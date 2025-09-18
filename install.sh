@@ -56,14 +56,16 @@ then
 
   # install basic homebrew packages
   echo_pretty "Install homebrew packages"
-  brew install --cask ghostty karabiner-elements google-chrome rectangle eul \
+  brew install --cask ghostty karabiner-elements google-chrome rectangle \
     font-jetbrains-mono
 
-  brew install wget curl coreutils git bash-completion \
+  # coreutils for GNU utility
+  brew install git bash-completion \
+    jq wget curl coreutils \
     vim neovim \
-    jq \
     cscope reattach-to-user-namespace tmux \
-    docker docker-compose
+    docker docker-compose podman \
+    stats
 
   # install asdf
   echo_pretty "Install asdf"
@@ -109,23 +111,51 @@ then
   asdf install java corretto-22.0.2.9.1
   asdf set --home java corretto-22.0.2.9.1
 
+<<<<<<< HEAD
   echo_pretty "Install asdf clojure" 2
   asdf plugin add clojure https://github.com/asdf-community/asdf-clojure.git
   asdf install clojure 1.12.0.1530
   asdf set --home clojure 1.12.0.1530
+=======
+  echo_pretty "Install asdf kotlin" 2
+  asdf plugin add kotlin
+  asdf install kotlin 1.8.22
+  asdf set --home kotlin 1.8.22
+>>>>>>> 80e6c43f43f6af63b4b0d60745aa23fed49c9bff
 
   brew tap universal-ctags/universal-ctags
   brew install --HEAD universal-ctags
 
   echo_pretty "Install latest bash"
   brew install bash
-  if [-z $(echo $(which bash) | grep $(which bash))]
+  # 1. brew --prefix를 사용해 Homebrew로 설치된 bash 경로를 명확히 지정합니다.
+  #    Apple Silicon: /opt/homebrew/bin/bash
+  #    Intel Mac: /usr/local/bin/bash
+  BREW_BASH_PATH=$(brew --prefix)/bin/bash
+  # 2. /etc/shells 파일에 해당 경로가 있는지 정확하게 확인합니다.
+  #    grep -q: 결과를 출력하지 않고 종료 코드로 성공/실패만 반환합니다.
+  #    grep -F: 경로에 포함될 수 있는 특수문자(., / 등)를 일반 문자열로 처리하여 안전합니다.
+  #    '!'는 grep이 실패했을 때(경로가 없을 때) if문이 참이 되도록 합니다.
+  if ! grep -qF "$BREW_BASH_PATH" /etc/shells; then
+    echo_pretty "Adding '$BREW_BASH_PATH' to /etc/shells"
+    # 3. sudo를 통해 파일에 안전하게 내용을 추가합니다.
+    echo "$BREW_BASH_PATH" | sudo tee -a /etc/shells > /dev/null
+  fi
+  if [ -z $(echo $(which bash) | grep $(which bash))]
   then
     echo_pretty "Enroll default shell path into /etc/shells" 2
     sudo bash -c 'echo $(which bash) >> /etc/shells'
   fi
-  chsh -s $(which bash)
-  echo_pretty "Changing default shell into $SHELL [version: $($SHELL --version | awk '/GNU bash, version/ {print $4}')]" 2
+  chsh -s "$BREW_BASH_PATH"
+  NEW_BASH_VERSION=$("$BREW_BASH_PATH" --version | awk '/version/ {print $4}')
+  echo_pretty "✅ Default shell changed to $BREW_BASH_PATH" 2
+  echo_pretty "   Version: $NEW_BASH_VERSION" 2
+  echo_pretty "   (Changes will apply after your next login)" 2
+
+  # for isolated python app space
+  brew install pipx
+  pipx ensurepath
+  sudo pipx ensurepath --global
 
   gem install gem-ctags
   gem ctags

@@ -194,7 +194,7 @@ Plug 'dense-analysis/ale'
         \'*': ['remove_trailing_lines', 'trim_whitespace'],
         \'javascript': ['prettier', 'eslint'],
         \'typescript': ['prettier', 'eslint'],
-        \'python': ['black', 'yapf']
+        \'python': ['black']
         \}
   let g:ale_linters = {
         \'javascript': ['eslint'],
@@ -549,3 +549,9 @@ nnoremap <leader>vim :call SaveToPlayground("~/.vim/playground/")<cr>
 nnoremap <leader>wv :call WrapVimTitle("-", "-")<CR>
 " Open init.vim
 nnoremap <leader>init :sp ~/.vimrc<cr>
+
+" ---------------------------------------------------------------------------
+" Keybindings - temp mapping
+" ---------------------------------------------------------------------------
+" line split for oneline - in visible mode
+vnoremap <leader>t1 :s/\s-/\r-/g<CR>
