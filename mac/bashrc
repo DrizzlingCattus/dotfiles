@@ -65,5 +65,5 @@ alias ls="ls -G --color=auto"
 cdl() { builtin cd "$@"; ll; }
 hcurl() { curl "cheat.sh/$1"; }
 
-# Created by `pipx` on 2025-07-03 04:55:16
-export PATH="$PATH:/Users/user/.local/bin"
+# Created by `pipx` on 2025-09-17 05:37:45
+export PATH="$PATH:/Users/$USER/.local/bin"

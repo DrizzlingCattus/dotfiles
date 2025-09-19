@@ -16,5 +16,5 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 export GPG_TTY=$(tty)
 
-# Created by `pipx` on 2025-07-03 04:55:16
-export PATH="$PATH:/Users/user/.local/bin"
+# Created by `pipx` on 2025-09-17 05:37:45
+export PATH="$PATH:/Users/$USER/.local/bin"
