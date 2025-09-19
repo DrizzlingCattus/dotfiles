@@ -30,9 +30,6 @@ export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 ## If you need to have curl first in your PATH, run:
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 
-export ASDF_DATA_DIR="$HOME/.asdf"
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-
 # setup extra env
 ## For compilers to find curl you may need to set:
 export LDFLAGS="-L/opt/homebrew/opt/curl/lib"

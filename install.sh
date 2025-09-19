@@ -60,8 +60,9 @@ then
     font-jetbrains-mono
 
   # coreutils for GNU utility
-  brew install vim wget curl coreutils git bash-completion \
-    jq \
+  brew install git bash-completion \
+    jq wget curl coreutils \
+    vim neovim \
     cscope reattach-to-user-namespace tmux \
     docker docker-compose podman \
     stats
@@ -109,6 +110,11 @@ then
   asdf plugin add java
   asdf install java corretto-22.0.2.9.1
   asdf set --home java corretto-22.0.2.9.1
+
+  echo_pretty "Install asdf clojure" 2
+  asdf plugin add clojure https://github.com/asdf-community/asdf-clojure.git
+  asdf install clojure 1.12.0.1530
+  asdf set --home clojure 1.12.0.1530
 
   echo_pretty "Install asdf kotlin" 2
   asdf plugin add kotlin
@@ -166,6 +172,7 @@ fi
 
 git config --global user.email "hit0473@gmail.com"
 git config --global user.name "DrizzlingCattus"
+git config --global core.editor "nvim"
 
 # install git completion
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
