@@ -414,14 +414,19 @@ endif
 " config ref: https://github.com/greggh/claude-code.nvim?tab=readme-ov-file#configuration
 if has("nvim")
 lua << EOF
-require('claude-code').setup({
-  refresh={
-    enable = true,
-    updatetime = 100,
-    timer_interval = 1000,
-    show_notifications = true,
-  }
-})
+local ok, cc = pcall(require, 'claude-code')
+if ok and cc and type(cc.setup) == 'function' then
+  cc.setup({
+    refresh={
+      enable = true,
+      updatetime = 100,
+      timer_interval = 1000,
+      show_notifications = true,
+    }
+  })
+else
+  vim.notify("claude-code not loaded: setup skipped", vim.log.levels.WARN)
+end
 EOF
 endif
 
