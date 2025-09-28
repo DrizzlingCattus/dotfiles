@@ -11,10 +11,10 @@ function echo_pretty() {
       echo -e "🚜\e[34m [[[[[[[[[[ $input_str ]]]]]]]]]] \e[0m"
       ;;
     "2")
-      echo -e "🛺\e[32m {{{{{{{{{{ $input_str }}}}}}}}}} \e[0m"
+      echo -e "--> 🛺\e[32m {{{{{{{{{{ $input_str }}}}}}}}}} \e[0m"
       ;;
     "3")
-     echo -e "🛵\e[33m (((((((((( $input_str )))))))))) \e[0m"
+     echo -e "----> 🛵\e[33m (((((((((( $input_str )))))))))) \e[0m"
       ;;
     *)
       echo "Invalid input: Please provide a level number between 1 and 3"
@@ -32,7 +32,8 @@ fi
 
 # backup current conf files and replace predefined conf-linked files
 mkdir -pv bak
-for conf in tmux.conf; do
+confs=( tmux.conf eslintrc.js prettierrc )
+for conf in ${confs[@]}; do
   [ -e ~/."$conf" ] && mv -v ~/."$conf" bak/."$conf"
   ln -sfv "$(pwd)/$conf" ~/."$conf"
 done
@@ -48,14 +49,14 @@ if [ "$OS_NAME" = 'Darwin' ]
 then
   if [ -z "$(which brew)" ]
   then
-    echo "Install homebrew"
+    echo "=== Install homebrew ==="
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     # echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "$BASE/bashrc"
   fi
   eval "$(/opt/homebrew/bin/brew shellenv)"
 
   # install basic homebrew packages
-  echo_pretty "Install homebrew packages"
+  echo_pretty "=== Install homebrew packages ===" 2
   brew install --cask ghostty karabiner-elements google-chrome rectangle \
     font-jetbrains-mono
 
@@ -68,7 +69,7 @@ then
     stats
 
   # install asdf
-  echo_pretty "Install asdf"
+  echo_pretty "=== Install asdf multiple version manager ==="
   if [ -z "$(which asdf)" ]
   then
     brew install asdf
@@ -76,47 +77,47 @@ then
     # echo -e "\n. \"$(brew --prefix asdf)/etc/bash_completion.d/asdf.bash\"" >> "$BASE/bashrc"
   fi
 
-  echo_pretty "Install asdf node" 2
+  echo_pretty "=== Install asdf node ===" 2
   asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
   asdf install nodejs latest
   asdf set --home nodejs latest
 
-  echo_pretty "Install asdf python" 2
+  echo_pretty "=== Install asdf python ===" 2
   asdf plugin add python
   asdf install python latest
   asdf set --home python latest
 
-  echo_pretty "Install asdf golang" 2
+  echo_pretty "=== Install asdf golang ===" 2
   asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
   asdf install golang 1.21.0
   asdf set --home golang 1.21.0
 
-  echo_pretty "Install asdf ruby" 2
+  echo_pretty "=== Install asdf ruby ===" 2
   asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
   asdf install ruby latest
   asdf set --home ruby latest
 
-  echo_pretty "Install asdf kubectl" 2
+  echo_pretty "=== Install asdf kubectl ===" 2
   asdf plugin add kubectl https://github.com/asdf-community/asdf-kubectl.git
   asdf install kubectl latest
   asdf set --home kubectl latest
 
-  echo_pretty "Install asdf deno" 2
+  echo_pretty "=== Install asdf deno ===" 2
   asdf plugin add deno https://github.com/asdf-community/asdf-deno.git
   asdf install deno latest
   asdf set --home deno latest
 
-  echo_pretty "Install asdf java" 2
+  echo_pretty "=== Install asdf java ===" 2
   asdf plugin add java
   asdf install java corretto-22.0.2.9.1
   asdf set --home java corretto-22.0.2.9.1
 
-  echo_pretty "Install asdf clojure" 2
+  echo_pretty "=== Install asdf clojure ===" 2
   asdf plugin add clojure https://github.com/asdf-community/asdf-clojure.git
   asdf install clojure 1.12.0.1530
   asdf set --home clojure 1.12.0.1530
 
-  echo_pretty "Install asdf kotlin" 2
+  echo_pretty "=== Install asdf kotlin ===" 2
   asdf plugin add kotlin
   asdf install kotlin 1.8.22
   asdf set --home kotlin 1.8.22
@@ -124,7 +125,7 @@ then
   brew tap universal-ctags/universal-ctags
   brew install --HEAD universal-ctags
 
-  echo_pretty "Install latest bash"
+  echo_pretty "=== Install latest bash ==="
   brew install bash
   # 1. brew --prefix를 사용해 Homebrew로 설치된 bash 경로를 명확히 지정합니다.
   #    Apple Silicon: /opt/homebrew/bin/bash
@@ -150,10 +151,15 @@ then
   echo_pretty "   Version: $NEW_BASH_VERSION" 2
   echo_pretty "   (Changes will apply after your next login)" 2
 
-  # for isolated python app space
+  echo_pretty "=== Install pipx for isolated pyton app space ==="
   brew install pipx
   pipx ensurepath
   sudo pipx ensurepath --global
+
+  echo_pretty "=== Install global lint & fixer ==="
+  npm install -g eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin \
+    prettier eslint-config-prettier
+  # TODO: global python lint, fixer
 
   gem install gem-ctags
   gem ctags
