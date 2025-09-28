@@ -32,7 +32,7 @@ fi
 
 # backup current conf files and replace predefined conf-linked files
 mkdir -pv bak
-confs=( tmux.conf eslintrc.js prettierrc )
+confs=( tmux.conf eslintrc.js prettierrc ideavimrc )
 for conf in ${confs[@]}; do
   [ -e ~/."$conf" ] && mv -v ~/."$conf" bak/."$conf"
   ln -sfv "$(pwd)/$conf" ~/."$conf"
