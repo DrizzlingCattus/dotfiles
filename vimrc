@@ -30,7 +30,7 @@ Plug 'morhetz/gruvbox'
 "Plug 'pgavlin/pulumi.vim'
 
 " ---------------------------------------------------------------------------
-" plugin - vim magic
+" plugin - vim utility
 " ---------------------------------------------------------------------------
 Plug 'tpope/vim-repeat'
 
