@@ -45,6 +45,16 @@ for rc in $BASE/*; do
   ln -sfv "$rc" ~/."$RC_FILENAME"
 done
 
+mkdir -pv ~/bin
+for bin in bin/*; do
+  BIN_FILENAME=`basename $bin`
+  if [ ! -e ~/bin/"$BIN_FILENAME" ]
+  then
+    echo "Copy $bin into ~/bin/$BIN_FILENAME"
+    cp "$bin" ~/bin/"$BIN_FILENAME"
+  fi
+done
+
 if [ "$OS_NAME" = 'Darwin' ]
 then
   if [ -z "$(which brew)" ]
@@ -155,6 +165,9 @@ then
   brew install pipx
   pipx ensurepath
   sudo pipx ensurepath --global
+
+  echo_pretty "=== Install grpc ==="
+  brew install protobuf
 
   echo_pretty "=== Install global lint & fixer ==="
   npm install -g eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin \
