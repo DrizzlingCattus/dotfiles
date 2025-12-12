@@ -55,11 +55,14 @@ Plug 'tpope/vim-surround'
 " plugin - browsing
 " ---------------------------------------------------------------------------
 " draw indent line
+" indentLine 플러그인은 들여쓰기 가이드 라인을 그리기 위해 Vim의 conceal 기능을 "해킹"해서 사용.
 Plug 'Yggdroot/indentLine'
   let g:indentLine_enabled = 1
   let g:indentLine_char_list = ['|', '¦', '┆', '┊']
   let g:indentLine_color_term = 239
   let g:indentLine_color_gui = '#616161'
+  " JSON 파일에서 indentLine 비활성화 (conceal 문제 해결)
+  let g:indentLine_fileTypeExclude = ['json']
 
 "Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
 "  autocmd! User indentLine doautocmd indentLine Syntax
@@ -348,9 +351,9 @@ autocmd vimenter * ++nested colorscheme gruvbox
 hi ColorColumn ctermbg=Red guibg=Red
 
 " add filetypes
-autocmd BufRead,BufNewFile *.yaml setfiletype general
-autocmd BufRead,BufNewFile *.yml setfiletype general
-autocmd BufRead,BufNewFile *.json setfiletype general
+" autocmd BufRead,BufNewFile *.yaml setfiletype general
+" autocmd BufRead,BufNewFile *.yml setfiletype general
+" autocmd BufRead,BufNewFile *.json setfiletype general
 autocmd BufRead,BufNewFile *.cu setfiletype cuda
 autocmd BufRead,BufNewFile *.kt setfiletype kotlin
 
@@ -359,9 +362,10 @@ autocmd BufRead,BufNewFile *.kt setfiletype kotlin
 " and duplicating make vim slow
 augroup customIndent
     autocmd! customIndent
-    autocmd FileType c set tabstop=4|set shiftwidth=4|set expandtab
-    autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab
-    autocmd FileType vim set tabstop=2|set shiftwidth=2|set expandtab
+    autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
+    autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 expandtab
+    autocmd FileType vim setlocal tabstop=2 shiftwidth=2 expandtab
+    autocmd FileType json setlocal tabstop=2 shiftwidth=2 expandtab conceallevel=0 concealcursor=
     autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 augroup END
 

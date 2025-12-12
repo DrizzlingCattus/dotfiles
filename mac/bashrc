@@ -30,12 +30,17 @@ export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 ## If you need to have curl first in your PATH, run:
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 
-# setup extra env
+# Setup extra env
 ## For compilers to find curl you may need to set:
 export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
 ## For pkg-config to find curl you may need to set:
 export PKG_CONFIG_PATH="/opt/homebrew/opt/curl/lib/pkgconfig"
+
+# Setup environment variables to be temporarily defined and used only in your local environment
+if [ -f ~/.bashrc.local.bash ]; then
+  source ~/.bashrc.local.bash
+fi
 
 
 # Load script or bin
