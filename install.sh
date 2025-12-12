@@ -192,6 +192,8 @@ fi
 git config --global user.email "hit0473@gmail.com"
 git config --global user.name "DrizzlingCattus"
 git config --global core.editor "nvim"
+# Git이 파일 경로에 포함된 한글과 같은 비 ASCII 문자를 이스케이프 시퀀스로 변환하지 않고 그대로 표시하도록 전역(global) 설정을 변경. 한글 깨짐 방지.
+git config --global core.quotePath false
 
 # install git completion
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
