@@ -193,7 +193,7 @@ Plug 'dense-analysis/ale'
   let g:ale_fixers = {
         \'*': ['remove_trailing_lines', 'trim_whitespace'],
         \'javascript': ['prettier', 'eslint'],
-        \'typescript': ['prettier', 'eslint'],
+        \'typescript': [],
         \'python': ['black']
         \}
   let g:ale_linters = {
@@ -404,6 +404,9 @@ if has_key(g:plugs, 'coc.nvim')
     autocmd VimEnter * nmap <silent> <leader>gd <Plug>(coc-definition)
     autocmd VimEnter * nmap <silent> <leader>gi <Plug>(coc-implementation)
     autocmd VimEnter * nmap <silent> <leader>su <Plug>(coc-references)
+    " 저장 시 자동으로 CoC Prettier 실행
+    autocmd BufWritePre *.ts,*.tsx :silent! call CocAction('format')
+    autocmd BufWritePre *.js,*.jsx :silent! call CocAction('format')
   augroup END
 endif
 

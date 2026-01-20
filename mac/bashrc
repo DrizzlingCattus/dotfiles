@@ -37,6 +37,8 @@ export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
 ## For pkg-config to find curl you may need to set:
 export PKG_CONFIG_PATH="/opt/homebrew/opt/curl/lib/pkgconfig"
 
+# Load bash-completion
+[[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
 
 # Load script or bin
 if [ -f ~/.git-completion.bash ]; then
@@ -58,6 +60,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 #
 alias ll='ls -FGlAhp --color=auto'
 alias ls="ls -G --color=auto"
+alias rawvim="$(which vim)"
+alias vim="nvim"
+
 
 cdl() { builtin cd "$@"; ll; }
 hcurl() { curl "cheat.sh/$1"; }
