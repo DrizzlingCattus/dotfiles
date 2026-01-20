@@ -30,7 +30,7 @@ export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 ## If you need to have curl first in your PATH, run:
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 
-# setup extra env
+# Setup extra env
 ## For compilers to find curl you may need to set:
 export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
@@ -39,6 +39,11 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/curl/lib/pkgconfig"
 
 # Load bash-completion
 [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+
+# Setup environment variables to be temporarily defined and used only in your local environment
+if [ -f ~/.bashrc.local.bash ]; then
+  source ~/.bashrc.local.bash
+fi
 
 # Load script or bin
 if [ -f ~/.git-completion.bash ]; then
@@ -57,7 +62,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # For JAVA_HOME configuration (https://github.com/halcyon/asdf-java?tab=readme-ov-file#java_home)
 . ~/.asdf/plugins/java/set-java-home.bash
 
-#
+###############################################################################
 alias ll='ls -FGlAhp --color=auto'
 alias ls="ls -G --color=auto"
 alias rawvim="$(which vim)"
