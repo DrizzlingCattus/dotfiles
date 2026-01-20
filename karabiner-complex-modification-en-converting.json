@@ -1,0 +1,47 @@
+{
+  "description":"Convert to en when ESC",
+  "manipulators": [
+    {
+      "type": "basic",
+      "from": {
+        "key_code": "escape",
+        "modifiers": {
+          "optional": [
+            "any"
+          ]
+        }
+      },
+      "to": [
+        {
+          "key_code": "escape"
+        }
+      ],
+      "to_after_key_up": [
+        {
+          "select_input_source": {
+            "language": "en"
+          }
+        }
+      ],
+      "conditions": [
+        {
+          "type": "frontmost_application_if",
+          "bundle_identifiers": [
+            "^com\\.apple\\.Terminal$",
+            "^com\\.googlecode\\.iterm2$",
+            "^co\\.zeit\\.hyperterm$",
+            "^co\\.zeit\\.hyper$",
+            "^io\\.alacritty$",
+            "^net\\.kovidgoyal\\.kitty$",
+						"^com\\.jetbrains\\.goland$",
+						"^com\\.jetbrains\\.intellij$",
+						"^com\\.jetbrains\\.intellij\\.ce$",
+						"^com\\.jetbrains\\.webstorm$",
+						"^com\\.jetbrains\\.pycharm$",
+            "^com\\.mitchellh\\.ghostty$"
+          ]
+        }
+      ]
+    }
+  ]
+}

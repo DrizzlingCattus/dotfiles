@@ -519,6 +519,10 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Navigate buffer
+nnoremap <leader>h :bprevious<CR>
+nnoremap <leader>l :bnext<CR>
+
 " Reload current vim script
 nnoremap <F5> :source %<cr>
 
