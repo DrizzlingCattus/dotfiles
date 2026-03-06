@@ -1,3 +1,12 @@
+# OPENSPEC:START
+# OpenSpec shell completions configuration
+if [ -d "/Users/al03170163/.local/share/bash-completion/completions" ]; then
+  for f in "/Users/al03170163/.local/share/bash-completion/completions"/*; do
+    [ -f "$f" ] && . "$f"
+  done
+fi
+# OPENSPEC:END
+
 # system variables
 export PROMPT_DIRTRIM=2
 export LS_COLORS="ow=1;105;30:di=1;34"

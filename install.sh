@@ -76,7 +76,8 @@ then
     vim neovim \
     cscope reattach-to-user-namespace tmux \
     docker docker-compose podman \
-    stats
+    stats \
+    terminal-notifier
 
   # install asdf
   echo_pretty "=== Install asdf multiple version manager ==="
