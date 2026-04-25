@@ -78,6 +78,9 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
           \| endif
   augroup END
 
+Plug 'ludovicchabant/vim-gutentags'
+  set statusline+=%{gutentags#statusline()}
+
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
   let g:tagbar_sort = 0
 
